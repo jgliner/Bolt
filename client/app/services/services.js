@@ -288,26 +288,22 @@ angular.module('bolt.services', [])
   };
 
   var signup = function (user) {
-    console.log(user);
     return $http({
       method: 'POST',
       url: '/api/users/signup',
       data: user
     })
     .then(function (resp) {
-      console.log(resp.data);
       return resp.data;
     });
   };
 
   var createFbToken = function(path, cb) {
     if ($window.localStorage.facebook) {
-      console.log(path)
       var token = path.split('=')[1];
       $window.localStorage.removeItem('facebook');
       $window.localStorage.setItem('com.bolt', token);
       Profile.getUser(function(user) {
-        console.log(user);
         $window.localStorage.setItem('preferredDistance', user.preferredDistance);
         $window.localStorage.setItem('runs', user.runs);
         $window.localStorage.setItem('achievements', JSON.stringify(user.achievements));
